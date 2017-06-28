@@ -38,6 +38,24 @@ public class Board {
 		{
 			HashMap<Tile, Peg> movement = new HashMap<Tile,Peg>();
 			movement.put(new Tile(2,3), getPegToRemove(new Tile(peg.getX()-1, peg.getY())));
+			return movement;
+		}
+		return null;
+		
+	}
+	
+	public HashMap<Tile, Peg> getRightMovement(Peg peg)
+	{
+		if(peg.getX() >= 7)
+			return null;
+		if(peg.getX() > 4 && (peg.getY() < 3 || peg.getY() > 5))
+			return null;
+		
+		if(getPegToRemove(new Tile(peg.getX()+1, peg.getY())) !=  null)
+		{
+			HashMap<Tile, Peg> movement = new HashMap<Tile,Peg>();
+			movement.put(new Tile(2,3), getPegToRemove(new Tile(peg.getX()+1, peg.getY())));
+			return movement;
 		}
 		return null;
 		
