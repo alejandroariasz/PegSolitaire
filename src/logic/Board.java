@@ -61,6 +61,40 @@ public class Board {
 		
 	}
 	
+	public HashMap<Tile, Peg> getUpMovement(Peg peg)
+	{
+		if(peg.getY() <= 1)
+			return null;
+		if(peg.getY() < 5 && (peg.getX() < 3 || peg.getX() > 5))
+			return null;
+		
+		if(getPegToRemove(new Tile(peg.getX(), peg.getY()-1)) !=  null)
+		{
+			HashMap<Tile, Peg> movement = new HashMap<Tile,Peg>();
+			movement.put(new Tile(2,3), getPegToRemove(new Tile(peg.getX(), peg.getY()-1)));
+			return movement;
+		}
+		return null;
+		
+	}
+	
+	public HashMap<Tile, Peg> getDownMovement(Peg peg)
+	{
+		if(peg.getY() >= 7)
+			return null;
+		if(peg.getY() > 4 && (peg.getX() < 3 || peg.getX() > 5))
+			return null;
+		
+		if(getPegToRemove(new Tile(peg.getX(), peg.getY()+1)) !=  null)
+		{
+			HashMap<Tile, Peg> movement = new HashMap<Tile,Peg>();
+			movement.put(new Tile(2,3), getPegToRemove(new Tile(peg.getX(), peg.getY()+1)));
+			return movement;
+		}
+		return null;
+		
+	}
+	
 	public Peg getPegToRemove(Tile tile)
 	{
 		int pegIndex = pegs.indexOf(new Peg(tile.getX(), tile.getY()));
