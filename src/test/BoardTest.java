@@ -13,6 +13,7 @@ import org.junit.Test;
 import logic.Board;
 import logic.Point;
 import logic.Tile;
+import util.Constant;
 
 public class BoardTest {
 
@@ -21,16 +22,10 @@ public class BoardTest {
 	 */
 	@Test
 	public void testBoard() {
-		fail("Not yet implemented");
+		Board boardTest = new Board();
+		assertTrue("board not empty", boardTest.getBoard() != null);
 	}
-
-	/**
-	 * Test method for {@link logic.Board#initBoard()}.
-	 */
-	@Test
-	public void testInitBoard() {
-		fail("Not yet implemented");
-	}
+	
 
 	/**
 	 * Test method for {@link logic.Board#isFinished()}.
@@ -38,20 +33,22 @@ public class BoardTest {
 	@Test
 	public void testIsFinished() {
 		List<Tile> tiles = new ArrayList<Tile>();
-		Board board = new Board();
+		Board boardTest = new Board();
 		
 		tiles.add(new Tile(new Point(3,3), true));
-		board.setBoard(tiles);
-		assertTrue("Win the game", board.isFinished());
+		boardTest.setBoard(tiles);
+		assertTrue("Win the game", boardTest.isFinished());
 		
 		tiles.clear();
 		tiles.add(new Tile(new Point(3,2), true));
-		assertFalse("fail winning", board.isFinished());
+		boardTest.setBoard(tiles);
+		assertFalse("fail winning", boardTest.isFinished());
 		
 		tiles.clear();
 		tiles.add(new Tile(new Point(3,2), true));
 		tiles.add(new Tile(new Point(3,3), true));
-		assertFalse("fail winning", board.isFinished());
+		boardTest.setBoard(tiles);
+		assertFalse("fail winning", boardTest.isFinished());
 	}
 
 	/**
@@ -59,7 +56,20 @@ public class BoardTest {
 	 */
 	@Test
 	public void testIsGameOver() {
-		fail("Not yet implemented");
+		List<Point> points = new ArrayList<Point>();
+		Board boardTest = new Board();
+		
+		points.add(new Point(2,1));
+		points.add(new Point(3,3));
+		points.add(new Point(3,5));			
+		boardTest.setBoard(Constant.setBoardPegs(points));
+		assertTrue("game over", boardTest.isGameOver());
+		
+		points.clear();
+		points.add(new Point(3,2));
+		points.add(new Point(3,3));
+		boardTest.setBoard(Constant.setBoardPegs(points));
+		assertFalse("continue playing", boardTest.isGameOver());
 	}
 
 	/**
@@ -67,47 +77,46 @@ public class BoardTest {
 	 */
 	@Test
 	public void testGetPeg() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link logic.Board#move(logic.Move)}.
-	 */
-	@Test
-	public void testMove() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link logic.Board#getAvailableMovements(logic.Tile)}.
-	 */
-	@Test
-	public void testGetAvailableMovements() {
-		fail("Not yet implemented");
-	}
+		List<Tile> tiles = new ArrayList<Tile>();
+		Board boardTest = new Board();
+		
+		tiles.add(new Tile(new Point(3,3), true));
+		boardTest.setBoard(tiles);
+		assertTrue("return peg", boardTest.getPeg(new Point(3,3)) != null);
+		
+		tiles.clear();
+		tiles.add(new Tile(new Point(3,2), true));
+		boardTest.setBoard(tiles);
+		assertTrue("null peg", boardTest.getPeg(new Point(3,3)) == null);
+		
+		tiles.clear();
+		tiles.add(new Tile(new Point(3,2), false));
+		boardTest.setBoard(tiles);
+		assertTrue("null peg", boardTest.getPeg(new Point(3,2)) == null);
+	}	
+	
 
 	/**
 	 * Test method for {@link logic.Board#getMove(logic.Point, logic.Point, logic.Point)}.
 	 */
 	@Test
 	public void testGetMove() {
-		fail("Not yet implemented");
+		
+		List<Tile> tiles = new ArrayList<Tile>();
+		Board boardTest = new Board();
+		
+		tiles.add(new Tile(new Point(3,3), true));
+		tiles.add(new Tile(new Point(3,4), true));
+		tiles.add(new Tile(new Point(3,5), false));
+		boardTest.setBoard(tiles);
+		assertTrue("move peg", boardTest.getMove(new Point(3,3), new Point(3,4), new Point(3,5)) != null);
+		
+		tiles.add(new Tile(new Point(3,3), true));
+		tiles.add(new Tile(new Point(3,4), true));
+		tiles.add(new Tile(new Point(3,5), false));
+		boardTest.setBoard(tiles);
+		assertTrue("move peg", boardTest.getMove(new Point(3,3), new Point(3,4), new Point(4,2)) == null);
 	}
-
-	/**
-	 * Test method for {@link logic.Board#getBoard()}.
-	 */
-	@Test
-	public void testGetBoard() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link logic.Board#setBoard(java.util.List)}.
-	 */
-	@Test
-	public void testSetBoard() {
-		fail("Not yet implemented");
-	}
+	
 
 }
