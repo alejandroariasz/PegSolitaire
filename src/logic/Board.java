@@ -19,6 +19,15 @@ public class Board {
 		this.board = Constant.getCross();
 	}
 	
+	public Tile getPeg(Point point)
+	{
+		int pegIndex = board.indexOf(new Tile(point, true)); 
+		if( pegIndex == -1)
+			return null;
+		
+		return board.get(pegIndex); 
+	}
+	
 	public void move(Move move){
 		board.get(move.getPeg()).changePeg(false);
 		board.get(move.getMove()).changePeg(true);
@@ -49,7 +58,7 @@ public class Board {
 		Point point = peg.getPoint();
 		if(point.getY() < 2)
 			return null;
-		if(point.getY() < 5 && (point.getX() < 3 || point.getX() > 5))
+		if(point.getY() < 3 && (point.getX() < 2 || point.getX() > 4))
 			return null;
 		
 		return getMove(peg.getPoint(), point.getUpPoint(), point.getUpMove());
@@ -58,9 +67,9 @@ public class Board {
 	public Move getRightMovement(Tile peg)
 	{
 		Point point = peg.getPoint();
-		if(point.getX() > 6)
+		if(point.getX() > 4)
 			return null;
-		if(point.getX() > 3 && (point.getY() < 3 || point.getY() > 5))
+		if(point.getX() > 2 && (point.getY() < 2 || point.getY() > 4))
 			return null;
 		
 		return getMove(peg.getPoint(), point.getRightPoint(), point.getRightMove());
@@ -69,9 +78,9 @@ public class Board {
 	public Move getDownMovement(Tile peg)
 	{
 		Point point = peg.getPoint();
-		if(point.getY() > 6)
+		if(point.getY() > 4)
 			return null;
-		if(point.getY() > 3 && (point.getX() < 3 || point.getX() > 5))
+		if(point.getY() > 2 && (point.getX() < 2 || point.getX() > 4))
 			return null;
 		
 		return getMove(peg.getPoint(), point.getUpPoint(), point.getUpMove());
@@ -82,7 +91,7 @@ public class Board {
 		Point point = peg.getPoint();
 		if(point.getX() < 2)
 			return null;
-		if(point.getX() < 5 && (point.getY() < 3 || point.getY() > 5))
+		if(point.getX() < 4 && (point.getY() < 2 || point.getY() > 4))
 			return null;
 		
 		return getMove(peg.getPoint(), point.getLeftPoint(), point.getLeftMove());

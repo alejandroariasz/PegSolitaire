@@ -9,34 +9,34 @@ import logic.Tile;
 public class Constant {
 	
 	
-	public static int BOARD_SIZE = 9;
+	public static int BOARD_SIZE = 7;
 	
 	@SuppressWarnings("serial")
 	public static List<Point> LATIN_CROSS = new ArrayList<Point>()
 	{{
-		add(new Point(4,1));
-		add(new Point(4,2));
-		add(new Point(4,3));
-		add(new Point(4,4));
+		add(new Point(3,1));
+		add(new Point(3,2));
+		add(new Point(3,3));
+		add(new Point(3,4));
 		
-		add(new Point(5,2));
+		add(new Point(4,2));
 		add(new Point(3,2));
 	}};
 	
 	@SuppressWarnings("serial")
 	public static List<Point> PLUS = new ArrayList<Point>()
 	{{
-		add(new Point(4,1));
-		add(new Point(4,2));
-		add(new Point(4,3));
-		add(new Point(4,4));
-		add(new Point(4,5));
-		
-		add(new Point(1,3));
-		add(new Point(2,3));
+		add(new Point(3,1));
+		add(new Point(3,2));
 		add(new Point(3,3));
-		add(new Point(4,3));
-		add(new Point(5,3));
+		add(new Point(3,4));
+		add(new Point(3,5));
+		
+		add(new Point(1,2));
+		add(new Point(2,2));
+		add(new Point(3,2));
+		add(new Point(4,2));
+		add(new Point(5,2));
 	}};
 	
 	public static List<Tile> getLatinCross()
