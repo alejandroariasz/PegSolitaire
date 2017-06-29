@@ -18,11 +18,18 @@ public class Game extends PApplet{
 	boolean gameStarted;
 	List<Move> availableMovements;
 	
-	int margin = 15;
+	int margin = 50;
 	int cellSize = 70;
-	int optionSize = 170;
-	int optionMargin = 5;
-	int screenSize = 520;
+	int optionSize = 190;
+	int optionMargin = 10;
+	int screenSize = 590;
+	
+	int movements;
+	
+	Tile actualPeg;
+	
+	Move actualMove;
+	Move previousMove;
 	
 	@Override
     public void settings(){
@@ -34,6 +41,7 @@ public class Game extends PApplet{
     	pegSelected = false;
     	endGame = false;
     	gameStarted = false;
+    	movements = 0;
     	drawHome();
     	//drawGame();
     }
@@ -52,10 +60,13 @@ public class Game extends PApplet{
     	return new Cell( point.getX() * cellSize + margin, point.getY() * cellSize + margin );
     }
     
-    public void startGame(int option)
+    public void startGame()
     {
+    	int option = getOptionFromCell(new Cell(mouseX, mouseY));
+		if(option < 0 || option > 8) return;
     	board = new Board(option);
 		gameStarted = true;
+		drawGame();
     }
     
     @Override
@@ -64,51 +75,76 @@ public class Game extends PApplet{
     	
     }
     
-    public void mouseClicked() {
+    public void mouseClicked() 
+    {
     	if(!gameStarted)
     	{
-    		int option = getOptionFromCell(new Cell(mouseX, mouseY));
-    		if(option < 0 || option > 8) return;
-    		startGame(option);
+    		startGame();
+    		return;
     	}
     	
     	drawGame();
     	if(endGame) return;
     	
     	Point point = getPointFromCell(new Cell(mouseX, mouseY));
+    	
     	if(pegSelected)
-    	{
-    		for(Move movement : availableMovements)
-    		{
-    			Point movementPoint = board.getBoard().get(movement.getMove()).getPoint();
-        		if(point.equals(movementPoint))
-        		{
-        			board.move(movement);
-        			drawGame();
-        		}
-    		}
-    	}
+    		makeMovement(point);
     	
     	pegSelected = false;
     	
     	if(board.getPeg(point) != null)
-    	{
-    		pegSelected = true;
-    		availableMovements = board.getAvailableMovements(board.getPeg(point));
-    		for(Move movement : availableMovements)
-    			drawHint( board.getBoard().get(movement.getMove()).getPoint() );
-    	}
+    		selectPeg(point);
+    	
+    	System.out.println("Movimientos " + movements);
 	}
+    
+    public void makeMovement(Point point)
+    {
+    	for(Move movement : availableMovements)
+		{
+			Point movementPoint = board.getBoard().get(movement.getMove()).getPoint();
+    		if(point.equals(movementPoint))
+    		{
+    			previousMove = actualMove;
+        		actualMove = movement;
+        		
+        		if(previousMove != null)
+        		{
+        			Point actualOrigin = board.getBoard().get(actualMove.getPeg()).getPoint();
+            		Point previousFinal = board.getBoard().get(previousMove.getMove()).getPoint();
+            		movements += actualOrigin.equals(previousFinal) ? 0 : 1;
+        		}else
+        			movements++;
+        		
+        			
+    			board.move(movement);
+    			drawGame();
+    		}
+		}
+    }
+    
+    public void selectPeg(Point point)
+    {
+    	pegSelected = true;
+		availableMovements = board.getAvailableMovements(board.getPeg(point));
+		for(Move movement : availableMovements)
+			drawHint( board.getBoard().get(movement.getMove()).getPoint() );
+    }
     
     public void drawGame()
     {
-    	textSize(60);
     	background(255, 255, 255);
+    	
+    	textSize(18);
+    	text("Movements: " + movements, 400, 15);
+    	
+    	textSize(60);
     	if(board.isFinished())
-    		text("You have won!", 55, 260);
+    		text("You have won!", 65, 280);
     	
     	else if(board.isGameOver())
-    		text("GAME OVER", 70, 260);
+    		text("GAME OVER", 75, 280);
     	
     	if(board.isFinished() || board.isGameOver())
     		endGame = true;
