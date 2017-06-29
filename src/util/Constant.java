@@ -21,6 +21,7 @@ public class Constant {
 		
 		add(new Point(4,2));
 		add(new Point(3,2));
+		add(new Point(2,2));
 	}};
 	
 	@SuppressWarnings("serial")

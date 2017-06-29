@@ -1,10 +1,14 @@
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import logic.Board;
 import logic.Point;
 import logic.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
+import util.Constant;
 
 public class Game extends PApplet{
 	
@@ -29,6 +33,8 @@ public class Game extends PApplet{
     	pieceA_IMG = loadImage("figureA.png");
     	pieceB_IMG = loadImage("figureB.png");
     	
+    	board = new Board();
+    	
     	drawBoard();
     	setUpPegs();
     }
@@ -36,7 +42,8 @@ public class Game extends PApplet{
     @Override
     public void draw(){
      //System.out.println(mouseX + " " + mouseY);
-    	
+    	drawBoard();
+    	setUpPegs();
     }
     
     public void drawBoard()
@@ -46,8 +53,7 @@ public class Game extends PApplet{
     }
     
     public void setUpPegs()
-    {
-    	board = new Board();    	
+    {    	
     	
     	for (Tile peg : board.getBoard()) {
     		if(peg.hasPeg()){
@@ -58,6 +64,18 @@ public class Game extends PApplet{
     		
 		}
     	
+    }
+    
+    public void keyPressed()
+    {
+    	if(key == '1'){
+    		board.setBoard(Constant.getCross());
+    		setUpPegs();
+    	}
+    	if(key == '2'){
+    		board.setBoard(Constant.getLatinCross());
+    		setUpPegs();
+    	}
     }
 
 	public static void main(String[] args) {
