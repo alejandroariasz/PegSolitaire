@@ -32,11 +32,11 @@ public class Constant {
 		add(new Point(3,4));
 		add(new Point(3,5));
 		
-		add(new Point(1,2));
-		add(new Point(2,2));
-		add(new Point(3,2));
-		add(new Point(4,2));
-		add(new Point(5,2));
+		add(new Point(1,3));
+		add(new Point(2,3));
+		add(new Point(3,3));
+		add(new Point(4,3));
+		add(new Point(5,3));
 	}};
 	
 	public static List<Tile> getLatinCross()
