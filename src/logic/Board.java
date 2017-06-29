@@ -1,12 +1,13 @@
 package logic;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+
+import util.Constant;
 
 public class Board {
 	
-	private List<Peg> pegs;
+	private List<Tile> board;
 	
 	public Board()
 	{
@@ -15,91 +16,85 @@ public class Board {
 	
 	public void initBoard()
 	{
-		this.pegs = new ArrayList<Peg>()
-		{
-			
-		};
+		this.board = Constant.getCross();
 	}
 	
-	public List<Tile> getAvailableMovements()
-	{
-		
-		return null;
+	public void move(Move move){
+		board.get(move.getPeg()).changePeg(false);
+		board.get(move.getMove()).changePeg(true);
+		board.get(move.getPegToRemove()).changePeg(false);
 	}
 	
-	public HashMap<Tile, Peg> getLeftMovement(Peg peg)
+	public List<Move> getAvailableMovements(Tile peg)
 	{
-		if(peg.getX() <= 1)
-			return null;
-		if(peg.getX() < 5 && (peg.getY() < 3 || peg.getY() > 5))
-			return null;
+		List<Move> movements = new ArrayList<>();
 		
-		if(getPegToRemove(new Tile(peg.getX()-1, peg.getY())) !=  null)
-		{
-			HashMap<Tile, Peg> movement = new HashMap<Tile,Peg>();
-			movement.put(new Tile(2,3), getPegToRemove(new Tile(peg.getX()-1, peg.getY())));
-			return movement;
-		}
-		return null;
+		if(getUpMovement(peg) != null)
+			movements.add(getUpMovement(peg));
 		
+		if(getRightMovement(peg) != null)
+			movements.add(getRightMovement(peg));
+		
+		if(getDownMovement(peg) != null)
+			movements.add(getDownMovement(peg));
+		
+		if(getLeftMovement(peg) != null)
+			movements.add(getLeftMovement(peg));
+		
+		return movements;
 	}
 	
-	public HashMap<Tile, Peg> getRightMovement(Peg peg)
+	public Move getUpMovement(Tile peg)
 	{
-		if(peg.getX() >= 7)
+		Point point = peg.getPoint();
+		if(point.getY() < 2)
 			return null;
-		if(peg.getX() > 4 && (peg.getY() < 3 || peg.getY() > 5))
+		if(point.getY() < 5 && (point.getX() < 3 || point.getX() > 5))
 			return null;
 		
-		if(getPegToRemove(new Tile(peg.getX()+1, peg.getY())) !=  null)
-		{
-			HashMap<Tile, Peg> movement = new HashMap<Tile,Peg>();
-			movement.put(new Tile(2,3), getPegToRemove(new Tile(peg.getX()+1, peg.getY())));
-			return movement;
-		}
-		return null;
-		
+		return getMove(peg.getPoint(), point.getUpPoint(), point.getUpMove());
 	}
 	
-	public HashMap<Tile, Peg> getUpMovement(Peg peg)
+	public Move getRightMovement(Tile peg)
 	{
-		if(peg.getY() <= 1)
+		Point point = peg.getPoint();
+		if(point.getX() > 6)
 			return null;
-		if(peg.getY() < 5 && (peg.getX() < 3 || peg.getX() > 5))
+		if(point.getX() > 3 && (point.getY() < 3 || point.getY() > 5))
 			return null;
 		
-		if(getPegToRemove(new Tile(peg.getX(), peg.getY()-1)) !=  null)
-		{
-			HashMap<Tile, Peg> movement = new HashMap<Tile,Peg>();
-			movement.put(new Tile(2,3), getPegToRemove(new Tile(peg.getX(), peg.getY()-1)));
-			return movement;
-		}
-		return null;
-		
+		return getMove(peg.getPoint(), point.getRightPoint(), point.getRightMove());
 	}
 	
-	public HashMap<Tile, Peg> getDownMovement(Peg peg)
+	public Move getDownMovement(Tile peg)
 	{
-		if(peg.getY() >= 7)
+		Point point = peg.getPoint();
+		if(point.getY() > 6)
 			return null;
-		if(peg.getY() > 4 && (peg.getX() < 3 || peg.getX() > 5))
+		if(point.getY() > 3 && (point.getX() < 3 || point.getX() > 5))
 			return null;
 		
-		if(getPegToRemove(new Tile(peg.getX(), peg.getY()+1)) !=  null)
-		{
-			HashMap<Tile, Peg> movement = new HashMap<Tile,Peg>();
-			movement.put(new Tile(2,3), getPegToRemove(new Tile(peg.getX(), peg.getY()+1)));
-			return movement;
-		}
-		return null;
-		
+		return getMove(peg.getPoint(), point.getUpPoint(), point.getUpMove());
 	}
 	
-	public Peg getPegToRemove(Tile tile)
+	public Move getLeftMovement(Tile peg)
 	{
-		int pegIndex = pegs.indexOf(new Peg(tile.getX(), tile.getY()));
-		if(pegIndex >= 0)
-			return pegs.get(pegIndex);
+		Point point = peg.getPoint();
+		if(point.getX() < 2)
+			return null;
+		if(point.getX() < 5 && (point.getY() < 3 || point.getY() > 5))
+			return null;
+		
+		return getMove(peg.getPoint(), point.getLeftPoint(), point.getLeftMove());
+	}
+	
+	public Move getMove(Point peg, Point pegToRemove, Point move)
+	{
+		int pegIndex = board.indexOf(new Tile(peg, true));
+		int pegToRemoveIndex = board.indexOf(new Tile(pegToRemove, true));
+		int moveIndex = board.indexOf(new Tile(move, true));
+		if(pegToRemoveIndex >= 0 && moveIndex == -1)
+			return new Move(pegIndex, moveIndex, pegToRemoveIndex);
 		
 		return null;
 	}

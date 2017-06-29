@@ -2,29 +2,35 @@ package logic;
 
 public class Tile {
 
-	private int x;
-	private int y;
+	private Point point;
+	private boolean hasPeg;
 	
-	public Tile(int x, int y)
+	public Tile(Point point, boolean hasPeg)
 	{
-		this.x = x;
-		this.y = y;
+		this.point = point;
+		this.hasPeg = hasPeg;
 	}
 
-	public int getX() {
-		return x;
+	public Point getPoint() {
+		return point;
 	}
 
-	public void setX(int x) {
-		this.x = x;
+	public void setPoint(Point point) {
+		this.point = point;
 	}
 
-	public int getY() {
-		return y;
+	public boolean hasPeg() {
+		return hasPeg;
 	}
 
-	public void setY(int y) {
-		this.y = y;
+	public void changePeg(boolean hasPeg) {
+		this.hasPeg = hasPeg;
+	}
+	
+	@Override
+	public boolean equals(Object object)
+	{
+		return point.equals(((Tile)object).point) && ((Tile)object).hasPeg == hasPeg;  
 	}
 	
 }
