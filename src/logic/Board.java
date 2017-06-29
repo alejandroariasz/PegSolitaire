@@ -9,14 +9,14 @@ public class Board {
 	
 	private List<Tile> board;
 
-	public Board()
+	public Board(int option)
 	{
-		initBoard();
+		initBoard(option);
 	}
 	
-	public void initBoard()
+	public void initBoard(int option)
 	{
-		this.board = Constant.getCross();
+		this.board = Constant.getBoardConfigurations().get(option);
 	}
 	
 	public boolean isFinished()
@@ -82,7 +82,7 @@ public class Board {
 		Point point = peg.getPoint();
 		if(point.getY() < 2)
 			return null;
-		if(point.getY() < 3 && (point.getX() < 2 || point.getX() > 4))
+		if(point.getY() < 4 && (point.getX() < 2 || point.getX() > 4))
 			return null;
 		
 		return getMove(peg.getPoint(), point.getUpPoint(), point.getUpMove());
