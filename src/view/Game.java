@@ -79,6 +79,18 @@ public class Game extends PApplet{
     {
     	background(255, 255, 255);
     	
+    	textSize(60);
+    	if(board.isFinished())
+    	{
+    		text("You have won!", 60, 260);
+    	}
+    	else if(board.isGameOver())
+    	{
+    		text("GAME OVER", 70, 260);
+    	}
+    	
+    	
+    	
     	for(Tile tile : board.getBoard()){
     		if(!tile.hasPeg()) continue;
     		fill(0,0,255);

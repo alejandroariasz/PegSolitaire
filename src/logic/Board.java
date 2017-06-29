@@ -19,6 +19,30 @@ public class Board {
 		this.board = Constant.getCross();
 	}
 	
+	public boolean isFinished()
+	{
+		int numOfPegs = 0;
+		Tile peg = board.get(0);
+		for(Tile tile : board)
+		{
+			if(!tile.hasPeg()) continue;
+			numOfPegs++;
+			peg = tile;
+		}
+		return numOfPegs == 1 && peg.getPoint().equals(new Point(3,3));
+	}
+	
+	public boolean isGameOver()
+	{
+		for(Tile tile : board)
+		{
+			if(!tile.hasPeg()) continue;
+			if(getAvailableMovements(tile).size() > 0)
+				return false;
+		}
+		return true;
+	}
+	
 	public Tile getPeg(Point point)
 	{
 		int pegIndex = board.indexOf(new Tile(point, true)); 
