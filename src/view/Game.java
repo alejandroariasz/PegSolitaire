@@ -14,39 +14,44 @@ public class Game extends PApplet{
 	PImage boardIMG;
 	Board board;
 	boolean pegSelected;
+	boolean endGame;
+	boolean gameStarted;
 	List<Move> availableMovements;
+	
+	int margin = 10;
+	int cellSize = 70;
 	
 	@Override
     public void settings(){
-		// load board images
-    	//boardIMG = loadImage("board.jpg");
-        //size(boardIMG.width,boardIMG.height);
 		size(510, 510);
     }
 
     @Override
-    public void setup(){ 
+    public void setup(){
+    	pegSelected = false;
+    	endGame = false;
     	board = new Board();
-    	drawBoard();
+    	
+    	drawGame();
     }
     
     public Point getPointFromCell(Cell cell)
     {
-    	System.out.println("Cell " + cell.getX() + " " + cell.getY());
-    	return new Point( (cell.getX() - 10) / 70, (cell.getY() - 10) / 70 );
+    	return new Point( (cell.getX() - margin) / cellSize, (cell.getY() - margin) / cellSize );
     }
     
     public Cell getCellFromPoint(Point point){
-    	return new Cell( point.getX() * 70 + 10, point.getY() * 70 + 10 );
+    	return new Cell( point.getX() * cellSize + margin, point.getY() * cellSize + margin );
     }
     
     @Override
     public void draw(){
-     //System.out.println(mouseX + " " + mouseY);
+    	
     }
     
     public void mouseClicked() {
-    	drawBoard();
+    	drawGame();
+    	if(endGame) return;
     	Point point = getPointFromCell(new Cell(mouseX, mouseY));
     	if(pegSelected)
     	{
@@ -56,7 +61,7 @@ public class Game extends PApplet{
         		if(point.equals(movementPoint))
         		{
         			board.move(movement);
-        			drawBoard();
+        			drawGame();
         		}
     		}
     	}
@@ -65,58 +70,73 @@ public class Game extends PApplet{
     	
     	if(board.getPeg(point) != null)
     	{
-    		fill(255, 0, 0, 125);
     		pegSelected = true;
     		availableMovements = board.getAvailableMovements(board.getPeg(point));
-    		for(Move movement : availableMovements){
-    			Cell cell = getCellFromPoint(board.getBoard().get(movement.getMove()).getPoint());
-    			rect(cell.getX(), cell.getY(), 70, 70);
-    		}
+    		for(Move movement : availableMovements)
+    			drawHint( board.getBoard().get(movement.getMove()).getPoint() );
     	}
 	}
     
+    public void drawGame()
+    {
+    	textSize(60);
+    	background(255, 255, 255);
+    	if(board.isFinished())
+    		text("You have won!", 55, 260);
+    	
+    	else if(board.isGameOver())
+    		text("GAME OVER", 70, 260);
+    	
+    	if(board.isFinished() || board.isGameOver())
+    		endGame = true;
+    	else
+    		drawBoard();
+    }
+    
     public void drawBoard()
     {
-    	background(255, 255, 255);
-    	
-    	textSize(60);
-    	if(board.isFinished())
+    	for(Tile tile : board.getBoard())
     	{
-    		text("You have won!", 60, 260);
-    	}
-    	else if(board.isGameOver())
-    	{
-    		text("GAME OVER", 70, 260);
-    	}
-    	
-    	
-    	
-    	for(Tile tile : board.getBoard()){
     		if(!tile.hasPeg()) continue;
-    		fill(0,0,255);
-    		Cell cell = getCellFromPoint(tile.getPoint());
-    		rect(cell.getX() + 10, cell.getY() + 10, 50, 50);
+    		drawPeg(tile.getPoint());
     	}
     	
-    	line(10, 10 + 140, 10, 10 + 350);
-    	line(10 + 70*7, 10 + 140, 10 + 70*7, 10 + 350);
-    	line(10 + 70, 10 + 140, 10 + 70, 10 + 350);
-    	line(10 + 70*6, 10 + 140, 10 + 70*6, 10 + 350);
+    	for(int i = 0; i < 2; i++)
+    	{
+    		line(margin + cellSize * i, margin + 140, margin + cellSize * i, margin + 350);
+    		line(margin + 140, margin + cellSize * i, margin + 350, margin + cellSize * i);
+    	}
+    		
+    	for(int i = 6; i < 8; i++)
+    	{
+    		line(margin + cellSize * i, margin + 140, margin + cellSize * i, margin + 350);
+    		line(margin + 140, margin + cellSize * i, margin + 350, margin + cellSize * i);
+    	}
+    		
     	for(int i = 2; i < 6; i++)
-    		line(10 + 70*i, 10 + 0, 10 + 70*i, 10 + 490);
+    		line(margin + 70*i, margin + 0, margin + 70*i, margin + 490);
     	
-    	line(10 + 140, 10, 10 + 350, 10);
-    	line(10 + 140, 10 + 70*7, 10 + 350, 10 + 70*7);
-    	line(10 + 140, 10 + 70, 10 + 350, 10 + 70);
-    	line(10 + 140, 10 + 70*6, 10 + 350, 10 + 70*6);
     	for(int i = 2; i < 6; i++)
-    		line(10, 10 + 70*i, 10 + 490, 10 + + 70*i);
+    		line(margin, margin + 70*i, margin + 490, margin + 70*i);
+    }
+    
+    public void drawPeg(Point point)
+    {
+    	fill(0,0,255);
+		Cell cell = getCellFromPoint(point);
+		rect(cell.getX() + margin, cell.getY() + margin, 50, 50);
+    }
+    
+    public void drawHint(Point point)
+    {
+    	fill(255, 0, 0, 125);
+    	Cell cell = getCellFromPoint(point);
+    	rect(cell.getX(), cell.getY(), cellSize, cellSize);
     }
 
-	public static void main(String[] args) {
-		
+	public static void main(String[] args) 
+	{
 		PApplet.main("view.Game");
-
 	}
 
 }
