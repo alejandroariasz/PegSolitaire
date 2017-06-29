@@ -22,7 +22,7 @@ public class BoardTest {
 	 */
 	@Test
 	public void testBoard() {
-		Board boardTest = new Board();
+		Board boardTest = new Board(1);
 		assertTrue("board not empty", boardTest.getBoard() != null);
 	}
 	
@@ -33,7 +33,7 @@ public class BoardTest {
 	@Test
 	public void testIsFinished() {
 		List<Tile> tiles = new ArrayList<Tile>();
-		Board boardTest = new Board();
+		Board boardTest = new Board(1);
 		
 		tiles.add(new Tile(new Point(3,3), true));
 		boardTest.setBoard(tiles);
@@ -57,7 +57,7 @@ public class BoardTest {
 	@Test
 	public void testIsGameOver() {
 		List<Point> points = new ArrayList<Point>();
-		Board boardTest = new Board();
+		Board boardTest = new Board(1);
 		
 		points.add(new Point(2,1));
 		points.add(new Point(3,3));
@@ -78,7 +78,7 @@ public class BoardTest {
 	@Test
 	public void testGetPeg() {
 		List<Tile> tiles = new ArrayList<Tile>();
-		Board boardTest = new Board();
+		Board boardTest = new Board(1);
 		
 		tiles.add(new Tile(new Point(3,3), true));
 		boardTest.setBoard(tiles);
@@ -103,7 +103,7 @@ public class BoardTest {
 	public void testGetMove() {
 		
 		List<Tile> tiles = new ArrayList<Tile>();
-		Board boardTest = new Board();
+		Board boardTest = new Board(1);
 		
 		tiles.add(new Tile(new Point(3,3), true));
 		tiles.add(new Tile(new Point(3,4), true));

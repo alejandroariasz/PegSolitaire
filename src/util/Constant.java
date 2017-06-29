@@ -9,10 +9,10 @@ import logic.Tile;
 public class Constant {
 	
 	
-	public static int BOARD_SIZE = 7;
+	public static final int BOARD_SIZE = 7;
 	
 	
-	public static List<Point> LATIN_CROSS = new ArrayList<Point>();
+	protected static final List<Point> LATIN_CROSS = new ArrayList<Point>();
 	
 	static{
 		LATIN_CROSS.add(new Point(3,1));
@@ -25,7 +25,7 @@ public class Constant {
 	}
 	
 	
-	public static List<Point> BUTACO = new ArrayList<Point>();
+	protected static final List<Point> BUTACO = new ArrayList<Point>();
 	static{
 		BUTACO.add(new Point(2,0));
 		BUTACO.add(new Point(2,1));
@@ -43,7 +43,7 @@ public class Constant {
 	}
 	
 	
-	public static List<Point> PLUS = new ArrayList<Point>();
+	protected static final List<Point> PLUS = new ArrayList<Point>();
 	static{
 		PLUS.add(new Point(3,1));
 		PLUS.add(new Point(3,2));
@@ -58,7 +58,7 @@ public class Constant {
 	}
 	
 	
-	public static List<Point> PYRAMID = new ArrayList<Point>();
+	protected static final List<Point> PYRAMID = new ArrayList<Point>();
 	static{
 		PYRAMID.add(new Point(3,1));
 		
@@ -82,7 +82,7 @@ public class Constant {
 	}
 	
 	
-	public static List<Point> LAMP = new ArrayList<Point>();
+	protected static final List<Point> LAMP = new ArrayList<Point>();
 	static{
 		LAMP.add(new Point(3,0));
 		
@@ -110,7 +110,7 @@ public class Constant {
 	
 	
 	
-	public static List<Point> DIAMOND = new ArrayList<Point>();
+	protected static final List<Point> DIAMOND = new ArrayList<Point>();
 	static{
 		DIAMOND.add(new Point(3,0));
 		
@@ -147,7 +147,7 @@ public class Constant {
 	}
 	
 	
-	public static List<Point> BUTACO_DOBLE = new ArrayList<Point>();
+	protected static final List<Point> BUTACO_DOBLE = new ArrayList<Point>();
 	static{
 		BUTACO_DOBLE.addAll(BUTACO);
 		
@@ -165,7 +165,7 @@ public class Constant {
 	}
 	
 	
-	public static List<Point> HAT = new ArrayList<Point>();
+	protected static final List<Point> HAT = new ArrayList<Point>();
 	static{
 		HAT.addAll(BUTACO);
 		
@@ -180,7 +180,7 @@ public class Constant {
 	
 	
 	
-	public static List<Point> COMPLETE = new ArrayList<Point>();
+	protected static final List<Point> COMPLETE = new ArrayList<Point>();
 	static{
 		COMPLETE.addAll(DIAMOND);
 		
@@ -198,7 +198,7 @@ public class Constant {
 	}
 	
 	@SuppressWarnings("serial")
-	public static List<List<Tile>> getBoardConfigurations()
+	public static final List<List<Tile>> getBoardConfigurations()
 	{
 		return new ArrayList<List<Tile>>()
 		{{
@@ -214,7 +214,7 @@ public class Constant {
 		}};
 	}
 	
-	public static List<Tile> setBoardPegs(List<Point> typeConfig)
+	public static final List<Tile> setBoardPegs(List<Point> typeConfig)
 	{
 		List<Tile> board = new ArrayList<Tile>();
 		for(int i = 0; i < BOARD_SIZE; i++)

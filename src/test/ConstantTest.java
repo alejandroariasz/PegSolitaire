@@ -23,7 +23,7 @@ public class ConstantTest {
 	@Test
 	public void testSetBoardPegs() {
 		List<Point> points = new ArrayList<Point>();
-		Board boardTest = new Board();
+		Board boardTest = new Board(1);
 		
 		points.add(new Point(2,1));
 		points.add(new Point(3,3));
