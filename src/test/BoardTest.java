@@ -5,7 +5,14 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
+
+import logic.Board;
+import logic.Point;
+import logic.Tile;
 
 public class BoardTest {
 
@@ -30,7 +37,21 @@ public class BoardTest {
 	 */
 	@Test
 	public void testIsFinished() {
-		fail("Not yet implemented");
+		List<Tile> tiles = new ArrayList<Tile>();
+		Board board = new Board();
+		
+		tiles.add(new Tile(new Point(3,3), true));
+		board.setBoard(tiles);
+		assertTrue("Win the game", board.isFinished());
+		
+		tiles.clear();
+		tiles.add(new Tile(new Point(3,2), true));
+		assertFalse("fail winning", board.isFinished());
+		
+		tiles.clear();
+		tiles.add(new Tile(new Point(3,2), true));
+		tiles.add(new Tile(new Point(3,3), true));
+		assertFalse("fail winning", board.isFinished());
 	}
 
 	/**
