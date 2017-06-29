@@ -70,6 +70,12 @@ public class Point {
 	@Override
 	public boolean equals(Object object)
 	{
+		if (object == null)
+		    return false;
+
+		if (this.getClass() != object.getClass())
+		    return false;
+		  
 		return x == ((Point)object).x && y == ((Point)object).y;  
 	}
 }

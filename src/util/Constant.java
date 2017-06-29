@@ -11,190 +11,191 @@ public class Constant {
 	
 	public static int BOARD_SIZE = 7;
 	
-	@SuppressWarnings("serial")
-	public static List<Point> LATIN_CROSS = new ArrayList<Point>()
-	{{
-		add(new Point(3,1));
-		add(new Point(3,2));
-		add(new Point(3,3));
-		add(new Point(3,4));
-		
-		add(new Point(4,2));
-		add(new Point(2,2));
-	}};
 	
-	@SuppressWarnings("serial")
-	public static List<Point> BUTACO = new ArrayList<Point>()
-	{{
-		add(new Point(2,0));
-		add(new Point(2,1));
-		add(new Point(2,2));
-		add(new Point(2,3));
-		
-		add(new Point(3,0));
-		add(new Point(3,1));
-		add(new Point(3,2));
-		
-		add(new Point(4,0));
-		add(new Point(4,1));
-		add(new Point(4,2));
-		add(new Point(4,3));
-	}};
+	public static List<Point> LATIN_CROSS = new ArrayList<Point>();
 	
-	@SuppressWarnings("serial")
-	public static List<Point> PLUS = new ArrayList<Point>()
-	{{
-		add(new Point(3,1));
-		add(new Point(3,2));
-		add(new Point(3,3));
-		add(new Point(3,4));
-		add(new Point(3,5));
+	static{
+		LATIN_CROSS.add(new Point(3,1));
+		LATIN_CROSS.add(new Point(3,2));
+		LATIN_CROSS.add(new Point(3,3));
+		LATIN_CROSS.add(new Point(3,4));
 		
-		add(new Point(1,3));
-		add(new Point(2,3));
-		add(new Point(4,3));
-		add(new Point(5,3));
-	}};
-	
-	@SuppressWarnings("serial")
-	public static List<Point> PYRAMID = new ArrayList<Point>()
-	{{
-		add(new Point(3,1));
-		
-		add(new Point(2,2));
-		add(new Point(3,2));
-		add(new Point(4,2));
-		
-		add(new Point(1,3));
-		add(new Point(2,3));
-		add(new Point(3,3));
-		add(new Point(4,3));
-		add(new Point(5,3));
-		
-		add(new Point(0,4));
-		add(new Point(1,4));
-		add(new Point(2,4));
-		add(new Point(3,4));
-		add(new Point(4,4));
-		add(new Point(5,4));
-		add(new Point(6,4));
-	}};
-	
-	@SuppressWarnings("serial")
-	public static List<Point> LAMP = new ArrayList<Point>()
-	{{
-		add(new Point(3,0));
-		
-		add(new Point(2,1));
-		add(new Point(3,1));
-		add(new Point(4,1));
-		
-		add(new Point(1,2));
-		add(new Point(2,2));
-		add(new Point(3,2));
-		add(new Point(4,2));
-		add(new Point(5,2));
-		
-		add(new Point(3,3));
-		add(new Point(3,4));
-		
-		add(new Point(2,5));
-		add(new Point(3,5));
-		add(new Point(4,5));
-		
-		add(new Point(2,6));
-		add(new Point(3,6));
-		add(new Point(4,6));
-	}};
+		LATIN_CROSS.add(new Point(4,2));
+		LATIN_CROSS.add(new Point(2,2));	
+	}
 	
 	
-	@SuppressWarnings("serial")
-	public static List<Point> DIAMOND = new ArrayList<Point>()
-	{{
-		add(new Point(3,0));
+	public static List<Point> BUTACO = new ArrayList<Point>();
+	static{
+		BUTACO.add(new Point(2,0));
+		BUTACO.add(new Point(2,1));
+		BUTACO.add(new Point(2,2));
+		BUTACO.add(new Point(2,3));
 		
-		add(new Point(2,1));
-		add(new Point(3,1));
-		add(new Point(4,1));
+		BUTACO.add(new Point(3,0));
+		BUTACO.add(new Point(3,1));
+		BUTACO.add(new Point(3,2));
 		
-		add(new Point(1,2));
-		add(new Point(2,2));
-		add(new Point(3,2));
-		add(new Point(4,2));
-		add(new Point(5,2));
-		
-		add(new Point(3,4));
-		
-		add(new Point(0,3));
-		add(new Point(1,3));
-		add(new Point(2,3));
-		add(new Point(4,3));
-		add(new Point(5,3));
-		add(new Point(6,3));
-		
-		add(new Point(1,4));
-		add(new Point(2,4));
-		add(new Point(3,4));
-		add(new Point(4,4));
-		add(new Point(5,4));
-		
-		add(new Point(2,5));
-		add(new Point(3,5));
-		add(new Point(4,5));
-		
-		add(new Point(3,6));
-	}};
-	
-	@SuppressWarnings("serial")
-	public static List<Point> BUTACO_DOBLE = new ArrayList<Point>()
-	{{
-		addAll(BUTACO);
-		
-		add(new Point(2,4));
-		add(new Point(3,4));
-		add(new Point(4,4));
-		
-		add(new Point(2,5));
-		add(new Point(3,5));
-		add(new Point(4,5));
-		
-		add(new Point(2,6));
-		add(new Point(3,6));
-		add(new Point(4,6));
-	}};
-	
-	@SuppressWarnings("serial")
-	public static List<Point> HAT = new ArrayList<Point>()
-	{{
-		addAll(BUTACO);
-		
-		add(new Point(0,4));
-		add(new Point(1,4));
-		add(new Point(2,4));
-		
-		add(new Point(4,4));
-		add(new Point(5,4));
-		add(new Point(6,4));
-	}};
+		BUTACO.add(new Point(4,0));
+		BUTACO.add(new Point(4,1));
+		BUTACO.add(new Point(4,2));
+		BUTACO.add(new Point(4,3));
+	}
 	
 	
-	@SuppressWarnings("serial")
-	public static List<Point> COMPLETE = new ArrayList<Point>()
-	{{
-		addAll(DIAMOND);
+	public static List<Point> PLUS = new ArrayList<Point>();
+	static{
+		PLUS.add(new Point(3,1));
+		PLUS.add(new Point(3,2));
+		PLUS.add(new Point(3,3));
+		PLUS.add(new Point(3,4));
+		PLUS.add(new Point(3,5));
 		
-		add(new Point(2,0));
-		add(new Point(4,0));
+		PLUS.add(new Point(1,3));
+		PLUS.add(new Point(2,3));
+		PLUS.add(new Point(4,3));
+		PLUS.add(new Point(5,3));
+	}
+	
+	
+	public static List<Point> PYRAMID = new ArrayList<Point>();
+	static{
+		PYRAMID.add(new Point(3,1));
 		
-		add(new Point(0,2));
-		add(new Point(0,4));
+		PYRAMID.add(new Point(2,2));
+		PYRAMID.add(new Point(3,2));
+		PYRAMID.add(new Point(4,2));
 		
-		add(new Point(6,2));
-		add(new Point(6,4));
+		PYRAMID.add(new Point(1,3));
+		PYRAMID.add(new Point(2,3));
+		PYRAMID.add(new Point(3,3));
+		PYRAMID.add(new Point(4,3));
+		PYRAMID.add(new Point(5,3));
 		
-		add(new Point(2,6));
-		add(new Point(4,6));
-	}};
+		PYRAMID.add(new Point(0,4));
+		PYRAMID.add(new Point(1,4));
+		PYRAMID.add(new Point(2,4));
+		PYRAMID.add(new Point(3,4));
+		PYRAMID.add(new Point(4,4));
+		PYRAMID.add(new Point(5,4));
+		PYRAMID.add(new Point(6,4));
+	}
+	
+	
+	public static List<Point> LAMP = new ArrayList<Point>();
+	static{
+		LAMP.add(new Point(3,0));
+		
+		LAMP.add(new Point(2,1));
+		LAMP.add(new Point(3,1));
+		LAMP.add(new Point(4,1));
+		
+		LAMP.add(new Point(1,2));
+		LAMP.add(new Point(2,2));
+		LAMP.add(new Point(3,2));
+		LAMP.add(new Point(4,2));
+		LAMP.add(new Point(5,2));
+		
+		LAMP.add(new Point(3,3));
+		LAMP.add(new Point(3,4));
+		
+		LAMP.add(new Point(2,5));
+		LAMP.add(new Point(3,5));
+		LAMP.add(new Point(4,5));
+		
+		LAMP.add(new Point(2,6));
+		LAMP.add(new Point(3,6));
+		LAMP.add(new Point(4,6));
+	}
+	
+	
+	
+	public static List<Point> DIAMOND = new ArrayList<Point>();
+	static{
+		DIAMOND.add(new Point(3,0));
+		
+		DIAMOND.add(new Point(2,1));
+		DIAMOND.add(new Point(3,1));
+		DIAMOND.add(new Point(4,1));
+		
+		DIAMOND.add(new Point(1,2));
+		DIAMOND.add(new Point(2,2));
+		DIAMOND.add(new Point(3,2));
+		DIAMOND.add(new Point(4,2));
+		DIAMOND.add(new Point(5,2));
+		
+		DIAMOND.add(new Point(3,4));
+		
+		DIAMOND.add(new Point(0,3));
+		DIAMOND.add(new Point(1,3));
+		DIAMOND.add(new Point(2,3));
+		DIAMOND.add(new Point(4,3));
+		DIAMOND.add(new Point(5,3));
+		DIAMOND.add(new Point(6,3));
+		
+		DIAMOND.add(new Point(1,4));
+		DIAMOND.add(new Point(2,4));
+		DIAMOND.add(new Point(3,4));
+		DIAMOND.add(new Point(4,4));
+		DIAMOND.add(new Point(5,4));
+		
+		DIAMOND.add(new Point(2,5));
+		DIAMOND.add(new Point(3,5));
+		DIAMOND.add(new Point(4,5));
+		
+		DIAMOND.add(new Point(3,6));
+	}
+	
+	
+	public static List<Point> BUTACO_DOBLE = new ArrayList<Point>();
+	static{
+		BUTACO_DOBLE.addAll(BUTACO);
+		
+		BUTACO_DOBLE.add(new Point(2,4));
+		BUTACO_DOBLE.add(new Point(3,4));
+		BUTACO_DOBLE.add(new Point(4,4));
+		
+		BUTACO_DOBLE.add(new Point(2,5));
+		BUTACO_DOBLE.add(new Point(3,5));
+		BUTACO_DOBLE.add(new Point(4,5));
+		
+		BUTACO_DOBLE.add(new Point(2,6));
+		BUTACO_DOBLE.add(new Point(3,6));
+		BUTACO_DOBLE.add(new Point(4,6));
+	}
+	
+	
+	public static List<Point> HAT = new ArrayList<Point>();
+	static{
+		HAT.addAll(BUTACO);
+		
+		HAT.add(new Point(0,4));
+		HAT.add(new Point(1,4));
+		HAT.add(new Point(2,4));
+		
+		HAT.add(new Point(4,4));
+		HAT.add(new Point(5,4));
+		HAT.add(new Point(6,4));
+	}
+	
+	
+	
+	public static List<Point> COMPLETE = new ArrayList<Point>();
+	static{
+		COMPLETE.addAll(DIAMOND);
+		
+		COMPLETE.add(new Point(2,0));
+		COMPLETE.add(new Point(4,0));
+		
+		COMPLETE.add(new Point(0,2));
+		COMPLETE.add(new Point(0,4));
+		
+		COMPLETE.add(new Point(6,2));
+		COMPLETE.add(new Point(6,4));
+		
+		COMPLETE.add(new Point(2,6));
+		COMPLETE.add(new Point(4,6));
+	}
 	
 	@SuppressWarnings("serial")
 	public static List<List<Tile>> getBoardConfigurations()

@@ -30,6 +30,12 @@ public class Tile {
 	@Override
 	public boolean equals(Object object)
 	{
+		if (object == null)
+		    return false;
+
+		if (this.getClass() != object.getClass())
+		    return false;
+		
 		return point.equals(((Tile)object).point) && ((Tile)object).hasPeg == hasPeg;  
 	}
 	
