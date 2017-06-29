@@ -2,5 +2,5 @@ projectKey=pegsolitaire
 serverUrl=http://localhost:9000
 serverVersion=6.4.0.25310
 dashboardUrl=http://localhost:9000/dashboard/index/pegsolitaire
-ceTaskId=AVz1TEIPw7X4wJ3U61pl
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AVz1TEIPw7X4wJ3U61pl
+ceTaskId=AVz1vYV5w7X4wJ3U61pm
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AVz1vYV5w7X4wJ3U61pm
