@@ -237,7 +237,7 @@ public class Constant {
 	}
 	
 	public static List<Tile> cloneList(List<Tile> boardList) {
-        List<Tile> clonedList = new ArrayList<Tile>(boardList.size());
+        List<Tile> clonedList = new ArrayList<>(boardList.size());
         for (Tile tile : boardList) {
             clonedList.add(new Tile(tile));
         }

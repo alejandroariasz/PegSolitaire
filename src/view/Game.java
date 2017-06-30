@@ -1,7 +1,10 @@
 package view;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Deque;
 import java.util.List;
-import java.util.Stack;
 
 import logic.Board;
 import logic.Move;
@@ -25,11 +28,11 @@ public class Game extends PApplet{
 	boolean endGame;
 	boolean gameStarted;
 	List<Move> availableMovements;
-	Stack<List<Tile>> boardRecord;
-	Stack<String> playerRecord;
+	Deque<List<Tile>> boardRecord;
+	Deque<String> playerRecord;
 	
 	int movements;
-	Stack<Integer> movementsRecord;
+	Deque<Integer> movementsRecord;
 	
 	Tile actualPeg;
 	
@@ -49,9 +52,9 @@ public class Game extends PApplet{
     	endGame = false;
     	gameStarted = false;
     	movements = 0;
-    	boardRecord = new Stack<>();
-    	movementsRecord = new Stack<>();
-    	playerRecord = new Stack<>();
+    	boardRecord = new ArrayDeque<>();
+    	movementsRecord = new ArrayDeque<>();
+    	playerRecord = new ArrayDeque<>();
     	actualMove = null;
     	previousMove = null;
     	drawHome();
@@ -77,9 +80,9 @@ public class Game extends PApplet{
     	int option = getOptionFromCell(new Cell(mouseX, mouseY));
 		if(option < 0 || option > 8) return;
     	board = new Board(option);
-    	boardRecord.add(Constant.cloneList(board.getBoard()));
-    	movementsRecord.add(0);
-    	playerRecord.add("");
+    	boardRecord.addFirst(Constant.cloneList(board.getBoard()));
+    	movementsRecord.addFirst(0);
+    	playerRecord.addFirst("");
 		gameStarted = true;
 		drawGame();
     }
@@ -156,9 +159,9 @@ public class Game extends PApplet{
     			previousMove = actualMove;
         		actualMove = movement;
         		
-        		boardRecord.add(Constant.cloneList(board.getBoard()));
-        		movementsRecord.add(movements);
-        		playerRecord.add( "[" +
+        		boardRecord.addFirst(Constant.cloneList(board.getBoard()));
+        		movementsRecord.addFirst(movements);
+        		playerRecord.addFirst( "[" +
         				(char)(originPoint.getX() + 97) + "," + (originPoint.getY() + 1) + " -> " +
         				(char)(movementPoint.getX() + 97) + "," + (movementPoint.getY() + 1) + "]");
 
@@ -188,7 +191,7 @@ public class Game extends PApplet{
     {
     	background(255, 255, 255);
     	
-    	textSize(60);
+    	textSize(60);    	
     	fill(0, 0, 255);
     	if(board.isFinished())
     		text("You have won!", 75, 310);
@@ -201,15 +204,19 @@ public class Game extends PApplet{
     		endGame = true;
     		textSize(16);
         	fill(0, 0, 0);
-        	String record = "";
-        	for(int i = 1; i < playerRecord.size(); i++)
-        	{
+        	StringBuilder record = new StringBuilder();
+        	String[] stackToArray = new String[playerRecord.size()]; 
+        	ArrayList<String> playerRecordList = new ArrayList<>(Arrays.asList(playerRecord.toArray(stackToArray)));
+ 
+        	for(int i = 1; i < playerRecordList.size(); i++)
+        	{	
         		if( (i - 1) % 4 == 0 && (i - 1) > 0)
-        			record += "\n" + playerRecord.get(i) + "  ";
+        			record.append( "\n" + playerRecordList.get(i) + "  ");
         		else
-        			record += playerRecord.get(i) + "  ";
+        			record.append(playerRecordList.get(i) + "  ");
         	}
-    		text(record, 90, 420);
+        	String strRecord = record.toString();
+    		text(strRecord, 90, 420);
     	}
     	else
     		drawBoard();

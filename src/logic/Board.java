@@ -11,7 +11,7 @@ public class Board {
 	
 	public Board()
 	{
-		boardTiles = new ArrayList<Tile>();
+		boardTiles = new ArrayList<>();
 	}
 
 	public Board(int option)
