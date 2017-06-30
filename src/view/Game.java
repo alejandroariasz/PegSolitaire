@@ -10,6 +10,7 @@ import logic.Point;
 import logic.Tile;
 import processing.core.PApplet;
 import processing.core.PImage;
+import util.Constant;
 
 public class Game extends PApplet{
 	

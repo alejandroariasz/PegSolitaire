@@ -140,4 +140,12 @@ public class Board {
 		this.boardTiles = board;
 	}
 
+	public List<Tile> getBoard() {
+		return board;
+	}
+
+	public void setBoard(List<Tile> board) {
+		this.board = board;
+	}
+
 }
