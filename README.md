@@ -2,7 +2,7 @@
 
 Peg solitaire game using Processing 3.0, and java, inspecting the code with SonarQube
 
-##Features
+## Features
 
 * Reset game
 * Undo movements
