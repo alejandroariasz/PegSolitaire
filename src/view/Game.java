@@ -43,7 +43,6 @@ public class Game extends PApplet{
     	gameStarted = false;
     	movements = 0;
     	drawHome();
-    	//drawGame();
     }
     
     public Point getPointFromCell(Cell cell)
@@ -72,7 +71,7 @@ public class Game extends PApplet{
     @Override
     public void draw()
     {
-    	
+    	// Do nothing, we are using mouseClicked event, and not iterating on this method by default.
     }
     
     public void mouseClicked() 
@@ -95,8 +94,6 @@ public class Game extends PApplet{
     	
     	if(board.getPeg(point) != null)
     		selectPeg(point);
-    	
-    	System.out.println("Movimientos " + movements);
 	}
     
     public void makeMovement(Point point)

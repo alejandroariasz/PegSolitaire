@@ -8,11 +8,14 @@ import logic.Tile;
 
 public class Constant {
 	
+	private Constant() {
+		    throw new IllegalStateException("Pegs config constant class");
+	}
 	
 	public static final int BOARD_SIZE = 7;
 	
 	
-	protected static final List<Point> LATIN_CROSS = new ArrayList<Point>();
+	protected static final List<Point> LATIN_CROSS = new ArrayList<>();
 	
 	static{
 		LATIN_CROSS.add(new Point(3,1));
@@ -25,7 +28,7 @@ public class Constant {
 	}
 	
 	
-	protected static final List<Point> BUTACO = new ArrayList<Point>();
+	protected static final List<Point> BUTACO = new ArrayList<>();
 	static{
 		BUTACO.add(new Point(2,0));
 		BUTACO.add(new Point(2,1));
@@ -43,7 +46,7 @@ public class Constant {
 	}
 	
 	
-	protected static final List<Point> PLUS = new ArrayList<Point>();
+	protected static final List<Point> PLUS = new ArrayList<>();
 	static{
 		PLUS.add(new Point(3,1));
 		PLUS.add(new Point(3,2));
@@ -58,7 +61,7 @@ public class Constant {
 	}
 	
 	
-	protected static final List<Point> PYRAMID = new ArrayList<Point>();
+	protected static final List<Point> PYRAMID = new ArrayList<>();
 	static{
 		PYRAMID.add(new Point(3,1));
 		
@@ -82,7 +85,7 @@ public class Constant {
 	}
 	
 	
-	protected static final List<Point> LAMP = new ArrayList<Point>();
+	protected static final List<Point> LAMP = new ArrayList<>();
 	static{
 		LAMP.add(new Point(3,0));
 		
@@ -110,7 +113,7 @@ public class Constant {
 	
 	
 	
-	protected static final List<Point> DIAMOND = new ArrayList<Point>();
+	protected static final List<Point> DIAMOND = new ArrayList<>();
 	static{
 		DIAMOND.add(new Point(3,0));
 		
@@ -147,7 +150,7 @@ public class Constant {
 	}
 	
 	
-	protected static final List<Point> BUTACO_DOBLE = new ArrayList<Point>();
+	protected static final List<Point> BUTACO_DOBLE = new ArrayList<>();
 	static{
 		BUTACO_DOBLE.addAll(BUTACO);
 		
@@ -165,7 +168,7 @@ public class Constant {
 	}
 	
 	
-	protected static final List<Point> HAT = new ArrayList<Point>();
+	protected static final List<Point> HAT = new ArrayList<>();
 	static{
 		HAT.addAll(BUTACO);
 		
@@ -180,7 +183,7 @@ public class Constant {
 	
 	
 	
-	protected static final List<Point> COMPLETE = new ArrayList<Point>();
+	protected static final List<Point> COMPLETE = new ArrayList<>();
 	static{
 		COMPLETE.addAll(DIAMOND);
 		
@@ -216,7 +219,7 @@ public class Constant {
 	
 	public static final List<Tile> setBoardPegs(List<Point> typeConfig)
 	{
-		List<Tile> board = new ArrayList<Tile>();
+		List<Tile> board = new ArrayList<>();
 		for(int i = 0; i < BOARD_SIZE; i++)
 		{
 			for(int j = 0; j < BOARD_SIZE; j++)
