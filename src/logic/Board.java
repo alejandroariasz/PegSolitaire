@@ -8,6 +8,11 @@ import util.Constant;
 public class Board {
 	
 	private List<Tile> boardTiles;
+	
+	public Board()
+	{
+		boardTiles = new ArrayList<Tile>();
+	}
 
 	public Board(int option)
 	{
@@ -16,7 +21,9 @@ public class Board {
 	
 	public void initBoard(int option)
 	{
-		this.boardTiles = Constant.getBoardConfigurations().get(option);
+		if(boardTiles != null)
+			boardTiles.clear();
+		boardTiles = Constant.cloneList( Constant.getBoardConfigurations().get(option) );
 	}
 	
 	public boolean isFinished()
@@ -138,14 +145,6 @@ public class Board {
 
 	public void setBoard(List<Tile> board) {
 		this.boardTiles = board;
-	}
-
-	public List<Tile> getBoard() {
-		return board;
-	}
-
-	public void setBoard(List<Tile> board) {
-		this.board = board;
 	}
 
 }

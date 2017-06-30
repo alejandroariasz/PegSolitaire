@@ -204,15 +204,15 @@ public class Constant {
 	protected static final List<List<Tile>> getBoardConfigurations = new ArrayList<>();
 	static{
 		ArrayList<List<Tile>> configurations = new ArrayList<>();
-		configurations.add(setBoardPegs(LATIN_CROSS));
-		configurations.add(setBoardPegs(PLUS));
-		configurations.add(setBoardPegs(BUTACO));
-		configurations.add(setBoardPegs(PYRAMID));
-		configurations.add(setBoardPegs(BUTACO_DOBLE));
-		configurations.add(setBoardPegs(LAMP));
-		configurations.add(setBoardPegs(HAT));
-		configurations.add(setBoardPegs(DIAMOND));
-		configurations.add(setBoardPegs(COMPLETE));
+		configurations.add(cloneList(setBoardPegs(LATIN_CROSS)));
+		configurations.add(cloneList(setBoardPegs(PLUS)));
+		configurations.add(cloneList(setBoardPegs(BUTACO)));
+		configurations.add(cloneList(setBoardPegs(PYRAMID)));
+		configurations.add(cloneList(setBoardPegs(BUTACO_DOBLE)));
+		configurations.add(cloneList(setBoardPegs(LAMP)));
+		configurations.add(cloneList(setBoardPegs(HAT)));
+		configurations.add(cloneList(setBoardPegs(DIAMOND)));
+		configurations.add(cloneList(setBoardPegs(COMPLETE)));
 		getBoardConfigurations.addAll(configurations);
 	}
 	
@@ -235,5 +235,13 @@ public class Constant {
 	public static List<List<Tile>> getBoardConfigurations() {
 		return getBoardConfigurations;
 	}
+	
+	public static List<Tile> cloneList(List<Tile> boardList) {
+        List<Tile> clonedList = new ArrayList<Tile>(boardList.size());
+        for (Tile tile : boardList) {
+            clonedList.add(new Tile(tile));
+        }
+        return clonedList;
+    }
 
 }

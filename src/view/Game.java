@@ -1,6 +1,5 @@
 package view;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
@@ -14,6 +13,12 @@ import util.Constant;
 
 public class Game extends PApplet{
 	
+	int margin = 65;
+	int cellSize = 70;
+	int optionSize = 200;
+	int optionMargin = 10;
+	int screenSize = 620;
+	
 	PImage boardIMG;
 	Board board;
 	boolean pegSelected;
@@ -21,13 +26,7 @@ public class Game extends PApplet{
 	boolean gameStarted;
 	List<Move> availableMovements;
 	Stack<List<Tile>> boardRecord;
-	
-	
-	int margin = 65;
-	int cellSize = 70;
-	int optionSize = 200;
-	int optionMargin = 10;
-	int screenSize = 620;
+	Stack<String> playerRecord;
 	
 	int movements;
 	Stack<Integer> movementsRecord;
@@ -52,6 +51,9 @@ public class Game extends PApplet{
     	movements = 0;
     	boardRecord = new Stack<>();
     	movementsRecord = new Stack<>();
+    	playerRecord = new Stack<>();
+    	actualMove = null;
+    	previousMove = null;
     	drawHome();
     }
     
@@ -75,8 +77,9 @@ public class Game extends PApplet{
     	int option = getOptionFromCell(new Cell(mouseX, mouseY));
 		if(option < 0 || option > 8) return;
     	board = new Board(option);
-    	boardRecord.add(cloneList(board.getBoard()));
+    	boardRecord.add(Constant.cloneList(board.getBoard()));
     	movementsRecord.add(0);
+    	playerRecord.add("");
 		gameStarted = true;
 		drawGame();
     }
@@ -119,10 +122,11 @@ public class Game extends PApplet{
     		return;
     	}
     	
-    	if(mouseX > 180 && mouseX < 300 && mouseY > 10 && mouseY < 50 && boardRecord.size() > 1)
+    	if(mouseX > 180 && mouseX < 300 && mouseY > 10 && mouseY < 50 && boardRecord.size() > 1 && !endGame)
     	{
     		board.setBoard(boardRecord.pop());
     		movements = movementsRecord.pop();
+    		playerRecord.pop();
     		drawGame();
     		return;
     	}
@@ -146,14 +150,18 @@ public class Game extends PApplet{
     	for(Move movement : availableMovements)
 		{
 			Point movementPoint = board.getBoard().get(movement.getMove()).getPoint();
+			Point originPoint = board.getBoard().get(movement.getPeg()).getPoint();
     		if(point.equals(movementPoint))
     		{
     			previousMove = actualMove;
         		actualMove = movement;
         		
-        		boardRecord.add(cloneList(board.getBoard()));
+        		boardRecord.add(Constant.cloneList(board.getBoard()));
         		movementsRecord.add(movements);
-        		
+        		playerRecord.add( "[" +
+        				(char)(originPoint.getX() + 97) + "," + (originPoint.getY() + 1) + " -> " +
+        				(char)(movementPoint.getX() + 97) + "," + (movementPoint.getY() + 1) + "]");
+
         		if(previousMove != null)
         		{
         			Point actualOrigin = board.getBoard().get(actualMove.getPeg()).getPoint();
@@ -180,8 +188,6 @@ public class Game extends PApplet{
     {
     	background(255, 255, 255);
     	
-    	drawTopBar();
-    	
     	textSize(60);
     	fill(0, 0, 255);
     	if(board.isFinished())
@@ -191,9 +197,24 @@ public class Game extends PApplet{
     		text("GAME OVER", 105, 310);
     	
     	if(board.isFinished() || board.isGameOver())
+    	{
     		endGame = true;
+    		textSize(16);
+        	fill(0, 0, 0);
+        	String record = "";
+        	for(int i = 1; i < playerRecord.size(); i++)
+        	{
+        		if( (i - 1) % 4 == 0 && (i - 1) > 0)
+        			record += "\n" + playerRecord.get(i) + "  ";
+        		else
+        			record += playerRecord.get(i) + "  ";
+        	}
+    		text(record, 90, 420);
+    	}
     	else
     		drawBoard();
+    	
+    	drawTopBar();
     }
     
     public void drawTopBar()
@@ -202,7 +223,8 @@ public class Game extends PApplet{
     	fill(0, 0, 255);
     	text("Movements:    " + movements, 420, 35);
     	restartButton();
-    	undoButton();
+    	if(!endGame)
+    		undoButton();
     }
     
     public void drawHome()
@@ -235,10 +257,23 @@ public class Game extends PApplet{
     	}
     		
     	for(int i = 2; i < 6; i++)
+    	{
     		line(margin + 70*i, margin + 0, margin + 70*i, margin + 490);
-    	
-    	for(int i = 2; i < 6; i++)
     		line(margin, margin + 70*i, margin + 490, margin + 70*i);
+    	}
+    	drawGuide();
+    		
+    }
+    
+    public void drawGuide()
+    {
+    	textSize(18);
+    	fill(0, 0, 0);
+    	for(int i = 1; i < 8; i++)
+    	{
+    		text((char)(i+96), margin + 70 * i - 40, 585);
+    		text(i, 32, margin + 70 * i - 30);
+    	}
     }
     
     public void drawPeg(Point point)
@@ -253,14 +288,6 @@ public class Game extends PApplet{
     	fill(255, 0, 0, 125);
     	Cell cell = getCellFromPoint(point);
     	rect(cell.getX(), cell.getY(), cellSize, cellSize);
-    }
-    
-    public static List<Tile> cloneList(List<Tile> boardList) {
-        List<Tile> clonedList = new ArrayList<Tile>(boardList.size());
-        for (Tile tile : boardList) {
-            clonedList.add(new Tile(tile));
-        }
-        return clonedList;
     }
 
 	public static void main(String[] args) 
