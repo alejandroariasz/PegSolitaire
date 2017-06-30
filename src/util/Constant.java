@@ -200,22 +200,22 @@ public class Constant {
 		COMPLETE.add(new Point(4,6));
 	}
 	
-	@SuppressWarnings("serial")
-	public static final List<List<Tile>> getBoardConfigurations()
-	{
-		return new ArrayList<List<Tile>>()
-		{{
-			add(setBoardPegs(LATIN_CROSS));
-			add(setBoardPegs(PLUS));
-			add(setBoardPegs(BUTACO));
-			add(setBoardPegs(PYRAMID));
-			add(setBoardPegs(BUTACO_DOBLE));
-			add(setBoardPegs(LAMP));
-			add(setBoardPegs(HAT));
-			add(setBoardPegs(DIAMOND));
-			add(setBoardPegs(COMPLETE));
-		}};
+	
+	protected static final List<List<Tile>> getBoardConfigurations = new ArrayList<>();
+	static{
+		ArrayList<List<Tile>> configurations = new ArrayList<>();
+		configurations.add(setBoardPegs(LATIN_CROSS));
+		configurations.add(setBoardPegs(PLUS));
+		configurations.add(setBoardPegs(BUTACO));
+		configurations.add(setBoardPegs(PYRAMID));
+		configurations.add(setBoardPegs(BUTACO_DOBLE));
+		configurations.add(setBoardPegs(LAMP));
+		configurations.add(setBoardPegs(HAT));
+		configurations.add(setBoardPegs(DIAMOND));
+		configurations.add(setBoardPegs(COMPLETE));
+		getBoardConfigurations.addAll(configurations);
 	}
+	
 	
 	public static final List<Tile> setBoardPegs(List<Point> typeConfig)
 	{
@@ -229,6 +229,11 @@ public class Constant {
 			}
 		}
 		return board;
+	}
+
+
+	public static List<List<Tile>> getBoardConfigurations() {
+		return getBoardConfigurations;
 	}
 
 }
