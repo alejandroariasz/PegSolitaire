@@ -59,4 +59,10 @@ public class Point extends Position{
 		  
 		return getX() == ((Point)object).getX() && getY() == ((Point)object).getY();  
 	}
+	
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+	
 }
