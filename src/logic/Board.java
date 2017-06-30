@@ -7,31 +7,55 @@ import util.Constant;
 
 public class Board {
 	
-	private List<Tile> board;
-	
-	public Board()
+	private List<Tile> boardTiles;
+
+	public Board(int option)
 	{
-		initBoard();
+		initBoard(option);
 	}
 	
-	public void initBoard()
+	public void initBoard(int option)
 	{
-		this.board = Constant.getCross();
+		this.boardTiles = Constant.getBoardConfigurations().get(option);
+	}
+	
+	public boolean isFinished()
+	{
+		int numOfPegs = 0;
+		Tile peg = boardTiles.get(0);
+		for(Tile tile : boardTiles)
+		{
+			if(!tile.hasPeg()) continue;
+			numOfPegs++;
+			peg = tile;
+		}
+		return numOfPegs == 1 && peg.getPoint().equals(new Point(3,3));
+	}
+	
+	public boolean isGameOver()
+	{
+		for(Tile tile : boardTiles)
+		{
+			if(!tile.hasPeg()) continue;
+			if(!getAvailableMovements(tile).isEmpty())
+				return false;
+		}
+		return true;
 	}
 	
 	public Tile getPeg(Point point)
 	{
-		int pegIndex = board.indexOf(new Tile(point, true)); 
+		int pegIndex = boardTiles.indexOf(new Tile(point, true)); 
 		if( pegIndex == -1)
 			return null;
 		
-		return board.get(pegIndex); 
+		return boardTiles.get(pegIndex); 
 	}
 	
 	public void move(Move move){
-		board.get(move.getPeg()).changePeg(false);
-		board.get(move.getMove()).changePeg(true);
-		board.get(move.getPegToRemove()).changePeg(false);
+		boardTiles.get(move.getPeg()).changePeg(false);
+		boardTiles.get(move.getMove()).changePeg(true);
+		boardTiles.get(move.getPegToRemove()).changePeg(false);
 	}
 	
 	public List<Move> getAvailableMovements(Tile peg)
@@ -53,18 +77,18 @@ public class Board {
 		return movements;
 	}
 	
-	public Move getUpMovement(Tile peg)
+	private Move getUpMovement(Tile peg)
 	{
 		Point point = peg.getPoint();
 		if(point.getY() < 2)
 			return null;
-		if(point.getY() < 3 && (point.getX() < 2 || point.getX() > 4))
+		if(point.getY() < 4 && (point.getX() < 2 || point.getX() > 4))
 			return null;
 		
 		return getMove(peg.getPoint(), point.getUpPoint(), point.getUpMove());
 	}
 	
-	public Move getRightMovement(Tile peg)
+	private Move getRightMovement(Tile peg)
 	{
 		Point point = peg.getPoint();
 		if(point.getX() > 4)
@@ -75,7 +99,7 @@ public class Board {
 		return getMove(peg.getPoint(), point.getRightPoint(), point.getRightMove());
 	}
 	
-	public Move getDownMovement(Tile peg)
+	private Move getDownMovement(Tile peg)
 	{
 		Point point = peg.getPoint();
 		if(point.getY() > 4)
@@ -83,10 +107,10 @@ public class Board {
 		if(point.getY() > 2 && (point.getX() < 2 || point.getX() > 4))
 			return null;
 		
-		return getMove(peg.getPoint(), point.getUpPoint(), point.getUpMove());
+		return getMove(peg.getPoint(), point.getDownPoint(), point.getDownMove());
 	}
 	
-	public Move getLeftMovement(Tile peg)
+	private Move getLeftMovement(Tile peg)
 	{
 		Point point = peg.getPoint();
 		if(point.getX() < 2)
@@ -99,13 +123,21 @@ public class Board {
 	
 	public Move getMove(Point peg, Point pegToRemove, Point move)
 	{
-		int pegIndex = board.indexOf(new Tile(peg, true));
-		int pegToRemoveIndex = board.indexOf(new Tile(pegToRemove, true));
-		int moveIndex = board.indexOf(new Tile(move, true));
-		if(pegToRemoveIndex >= 0 && moveIndex == -1)
+		int pegIndex = boardTiles.indexOf(new Tile(peg, true));
+		int pegToRemoveIndex = boardTiles.indexOf(new Tile(pegToRemove, true));
+		int moveIndex = boardTiles.indexOf(new Tile(move, false));
+		if(pegToRemoveIndex >= 0 && moveIndex != -1)
 			return new Move(pegIndex, moveIndex, pegToRemoveIndex);
 		
 		return null;
+	}
+	
+	public List<Tile> getBoard() {
+		return boardTiles;
+	}
+
+	public void setBoard(List<Tile> board) {
+		this.boardTiles = board;
 	}
 
 	public List<Tile> getBoard() {

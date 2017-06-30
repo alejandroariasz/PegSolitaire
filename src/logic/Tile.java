@@ -10,6 +10,12 @@ public class Tile {
 		this.point = point;
 		this.hasPeg = hasPeg;
 	}
+	
+	public Tile(Tile tile)
+	{
+		this.point = tile.point;
+		this.hasPeg = tile.hasPeg;
+	}
 
 	public Point getPoint() {
 		return point;
@@ -30,7 +36,18 @@ public class Tile {
 	@Override
 	public boolean equals(Object object)
 	{
+		if (object == null)
+		    return false;
+
+		if (this.getClass() != object.getClass())
+		    return false;
+		
 		return point.equals(((Tile)object).point) && ((Tile)object).hasPeg == hasPeg;  
+	}
+	
+	@Override
+	public int hashCode() {
+		return super.hashCode();
 	}
 	
 }

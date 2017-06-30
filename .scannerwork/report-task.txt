@@ -1,0 +1,6 @@
+projectKey=pegsolitaire
+serverUrl=http://localhost:9000
+serverVersion=6.4.0.25310
+dashboardUrl=http://localhost:9000/dashboard/index/pegsolitaire
+ceTaskId=AVz2yogdw7X4wJ3U61p7
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AVz2yogdw7X4wJ3U61p7
