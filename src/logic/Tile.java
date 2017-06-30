@@ -45,4 +45,9 @@ public class Tile {
 		return point.equals(((Tile)object).point) && ((Tile)object).hasPeg == hasPeg;  
 	}
 	
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+	
 }

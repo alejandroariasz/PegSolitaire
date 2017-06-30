@@ -7,7 +7,7 @@ import util.Constant;
 
 public class Board {
 	
-	private List<Tile> board;
+	private List<Tile> boardTiles;
 
 	public Board(int option)
 	{
@@ -16,14 +16,14 @@ public class Board {
 	
 	public void initBoard(int option)
 	{
-		this.board = Constant.getBoardConfigurations().get(option);
+		this.boardTiles = Constant.getBoardConfigurations().get(option);
 	}
 	
 	public boolean isFinished()
 	{
 		int numOfPegs = 0;
-		Tile peg = board.get(0);
-		for(Tile tile : board)
+		Tile peg = boardTiles.get(0);
+		for(Tile tile : boardTiles)
 		{
 			if(!tile.hasPeg()) continue;
 			numOfPegs++;
@@ -34,10 +34,10 @@ public class Board {
 	
 	public boolean isGameOver()
 	{
-		for(Tile tile : board)
+		for(Tile tile : boardTiles)
 		{
 			if(!tile.hasPeg()) continue;
-			if(getAvailableMovements(tile).size() > 0)
+			if(!getAvailableMovements(tile).isEmpty())
 				return false;
 		}
 		return true;
@@ -45,17 +45,17 @@ public class Board {
 	
 	public Tile getPeg(Point point)
 	{
-		int pegIndex = board.indexOf(new Tile(point, true)); 
+		int pegIndex = boardTiles.indexOf(new Tile(point, true)); 
 		if( pegIndex == -1)
 			return null;
 		
-		return board.get(pegIndex); 
+		return boardTiles.get(pegIndex); 
 	}
 	
 	public void move(Move move){
-		board.get(move.getPeg()).changePeg(false);
-		board.get(move.getMove()).changePeg(true);
-		board.get(move.getPegToRemove()).changePeg(false);
+		boardTiles.get(move.getPeg()).changePeg(false);
+		boardTiles.get(move.getMove()).changePeg(true);
+		boardTiles.get(move.getPegToRemove()).changePeg(false);
 	}
 	
 	public List<Move> getAvailableMovements(Tile peg)
@@ -123,9 +123,9 @@ public class Board {
 	
 	public Move getMove(Point peg, Point pegToRemove, Point move)
 	{
-		int pegIndex = board.indexOf(new Tile(peg, true));
-		int pegToRemoveIndex = board.indexOf(new Tile(pegToRemove, true));
-		int moveIndex = board.indexOf(new Tile(move, false));
+		int pegIndex = boardTiles.indexOf(new Tile(peg, true));
+		int pegToRemoveIndex = boardTiles.indexOf(new Tile(pegToRemove, true));
+		int moveIndex = boardTiles.indexOf(new Tile(move, false));
 		if(pegToRemoveIndex >= 0 && moveIndex != -1)
 			return new Move(pegIndex, moveIndex, pegToRemoveIndex);
 		
@@ -133,11 +133,11 @@ public class Board {
 	}
 	
 	public List<Tile> getBoard() {
-		return board;
+		return boardTiles;
 	}
 
 	public void setBoard(List<Tile> board) {
-		this.board = board;
+		this.boardTiles = board;
 	}
 
 }

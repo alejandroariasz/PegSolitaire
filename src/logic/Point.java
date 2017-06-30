@@ -1,70 +1,51 @@
 package logic;
 
-public class Point {
+public class Point extends Position{	
 	
-	private int x;
-	private int y;
 	
 	public Point(int x, int y)
-	{
-		this.x = x;
-		this.y = y;
+	{ 	
+		super(x, y);		
 	}
 
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
-	
 	public Point getLeftPoint()
 	{
-		return new Point(x-1, y);
+		return new Point(getX()-1, getY());
 	}
 	
 	public Point getLeftMove()
 	{
-		return new Point(x-2, y);
+		return new Point(getX()-2, getY());
 	}
 	
 	public Point getRightPoint()
 	{
-		return new Point(x+1, y);
+		return new Point(getX()+1, getY());
 	}
 	
 	public Point getRightMove()
 	{
-		return new Point(x+2, y);
+		return new Point(getX()+2, getY());
 	}
 	
 	public Point getUpPoint()
 	{
-		return new Point(x, y-1);
+		return new Point(getX(), getY()-1);
 	}
 	
 	public Point getUpMove()
 	{
-		return new Point(x, y-2);
+		return new Point(getX(), getY()-2);
 	}
 	
 	public Point getDownPoint()
 	{
-		return new Point(x, y+1);
+		return new Point(getX(), getY()+1);
 	}
 	
 	public Point getDownMove()
 	{
-		return new Point(x, y+2);
+		return new Point(getX(), getY()+2);
 	}
 	
 	@Override
@@ -76,6 +57,12 @@ public class Point {
 		if (this.getClass() != object.getClass())
 		    return false;
 		  
-		return x == ((Point)object).x && y == ((Point)object).y;  
+		return getX() == ((Point)object).getX() && getY() == ((Point)object).getY();  
 	}
+	
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+	
 }

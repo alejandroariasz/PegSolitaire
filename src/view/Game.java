@@ -83,7 +83,7 @@ public class Game extends PApplet{
     @Override
     public void draw()
     {
-    	
+    	// Do nothing, we are using mouseClicked event, and not iterating on this method by default.
     }
     
     public void restartButton()
