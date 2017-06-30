@@ -10,6 +10,12 @@ public class Tile {
 		this.point = point;
 		this.hasPeg = hasPeg;
 	}
+	
+	public Tile(Tile tile)
+	{
+		this.point = tile.point;
+		this.hasPeg = tile.hasPeg;
+	}
 
 	public Point getPoint() {
 		return point;
